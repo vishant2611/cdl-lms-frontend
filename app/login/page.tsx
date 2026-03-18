@@ -41,13 +41,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div style={{ position: 'relative' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '60px' }}>
-            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <svg width="30" height="30" viewBox="0 0 50 50" fill="none">
-                <circle cx="25" cy="30" r="14" stroke="#AEBF66" strokeWidth="2.5"/>
-                <path d="M20 20 Q25 8 30 20" stroke="#6C9604" strokeWidth="2.5" fill="none"/>
-                <path d="M25 8 L28 14 L22 14 Z" fill="#6C9604"/>
-              </svg>
-            </div>
+            <img src="/cdl-logo.png" alt="CDL Logo" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
             <div>
               <span style={{ color: 'white', fontSize: '20px', fontWeight: '800', letterSpacing: '1px' }}>CROP<span style={{ color: '#AEBF66' }}>DEFENDERS</span></span>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', marginTop: '2px' }}>Learning Portal</p>

@@ -16,6 +16,9 @@ const NAV = [
   { href: '/dashboard/instructor', label: 'Instructor Panel', icon: '✏️', roles: ['INSTRUCTOR','ADMIN'] },
   { href: '/dashboard/manager', label: 'My Team', icon: '👥', roles: ['MANAGER','ADMIN'] },
   { href: '/dashboard/admin', label: 'Admin Console', icon: '⚙️', roles: ['ADMIN'] },
+  { href: '/dashboard/admin/users', label: 'User Management', icon: '👤', roles: ['ADMIN'] },
+  { href: '/dashboard/admin/departments', label: 'Departments', icon: '🏢', roles: ['ADMIN'] },
+
 ];
 
 const ROLE_COLORS: any = { ADMIN: '#10312B', INSTRUCTOR: '#6C9604', MANAGER: '#AEBF66', EMPLOYEE: '#3B82F6' };
