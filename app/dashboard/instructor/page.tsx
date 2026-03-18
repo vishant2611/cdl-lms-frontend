@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import api from '../../../lib/api';
+import { useAuthStore } from '../../../store/authStore';
 
 const TYPE_CFG: any = {
   SCORM: { color: '#10B981', bg: '#ECFDF5', icon: '🎮' },
@@ -16,6 +17,7 @@ export default function InstructorPage() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: '', description: '', type: 'PDF', fileUrl: '', duration: '' });
   const [loading, setLoading] = useState(false);
+  const { user } = useAuthStore();
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFile, setUploadedFile] = useState<any>(null);
@@ -86,7 +88,12 @@ export default function InstructorPage() {
       setUploadProgress(0);
     } finally { setLoading(false); }
   };
-
+const handleDelete = async (id: string) => {
+  if (!confirm('Are you sure you want to delete this course?')) return;
+  await api.delete('/courses/' + id);
+  const r = await api.get('/courses');
+  setCourses(r.data);
+};
   const handlePublish = async (id: string) => {
     await api.patch('/courses/' + id + '/publish', {});
     const r = await api.get('/courses');
@@ -284,12 +291,20 @@ export default function InstructorPage() {
                   <td><span style={{ fontWeight: '700', fontSize: '14px', color: '#10312B' }}>{c._count?.enrollments || 0}</span></td>
                   <td style={{ color: '#9CA3AF', fontSize: '12px' }}>{new Date(c.createdAt).toLocaleDateString()}</td>
                   <td>
-                    {!c.isPublished && (
-                      <button onClick={() => handlePublish(c.id)}
-                        style={{ padding: '7px 14px', borderRadius: '8px', background: 'linear-gradient(135deg, #10312B, #6C9604)', color: 'white', fontSize: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', fontFamily: 'Montserrat, sans-serif' }}>
-                        Publish →
-                      </button>
-                    )}
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                        {!c.isPublished && (
+                          <button onClick={() => handlePublish(c.id)}
+                            style={{ padding: '7px 14px', borderRadius: '8px', background: 'linear-gradient(135deg, #10312B, #6C9604)', color: 'white', fontSize: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', fontFamily: 'Montserrat, sans-serif' }}>
+                            Publish →
+                          </button>
+                        )}
+                        {(c.createdById === user?.id || user?.role === 'ADMIN') && (
+                          <button onClick={() => handleDelete(c.id)}
+                            style={{ padding: '7px 14px', borderRadius: '8px', background: '#FEF2F2', color: '#EF4444', fontSize: '12px', fontWeight: '700', border: '1px solid #FECACA', cursor: 'pointer', fontFamily: 'Montserrat, sans-serif' }}>
+                            🗑 Delete
+                          </button>
+                        )}
+                      </div>
                   </td>
                 </tr>
               );
