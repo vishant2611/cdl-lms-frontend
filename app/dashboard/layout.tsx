@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const W = collapsed ? 68 : 256;
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Montserrat, sans-serif' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Montserrat, sans-serif', position: 'relative' }}>
       {/* Sidebar */}
       <aside style={{ width: W, background: '#10312B', minHeight: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 100, transition: 'width 0.25s ease', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 

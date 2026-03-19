@@ -1,3 +1,9 @@
+const fs = require('fs');
+const path = require('path');
+
+const filePath = path.join('C:\\Users\\Crop Defender\\CDL-Projects\\cdl-lms-frontend\\app\\dashboard\\learning-paths\\page.tsx');
+
+const content = `
 'use client';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -370,3 +376,7 @@ const inp: React.CSSProperties = {
   padding: '10px 14px', fontSize: '14px', outline: 'none',
   background: 'white', fontFamily: 'Montserrat, sans-serif', boxSizing: 'border-box',
 };
+`;
+
+fs.writeFileSync(filePath, content.trim());
+console.log('✅ Learning paths page fixed with React Portal!');
