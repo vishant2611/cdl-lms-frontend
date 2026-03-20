@@ -11,6 +11,7 @@ export default function LearningPathsPage() {
   const { user } = useAuthStore();
   const router = useRouter();
   const isCreator = user?.role === 'ADMIN' || user?.role === 'INSTRUCTOR' || user?.role === 'MANAGER';
+  const canDelete = user?.role === 'ADMIN' || user?.role === 'INSTRUCTOR';
 
   const [paths, setPaths] = useState<any[]>([]);
   const [myPaths, setMyPaths] = useState<any[]>([]);
@@ -337,10 +338,10 @@ export default function LearningPathsPage() {
                           style={{ padding: '9px 14px', borderRadius: '8px', background: '#F4F7E8', color: '#6C9604', fontWeight: '700', fontSize: '12px', border: '1px solid #AEBF66', cursor: 'pointer' }}>
                           {p.isPublished ? 'Unpublish' : 'Publish'}
                         </button>
-                        <button onClick={() => handleDelete(p.id, p.title)}
+                        {canDelete && <button onClick={() => handleDelete(p.id, p.title)}
                           style={{ padding: '9px 12px', borderRadius: '8px', background: '#FEF2F2', color: '#EF4444', fontWeight: '700', fontSize: '12px', border: '1px solid #FECACA', cursor: 'pointer' }}>
                           🗑
-                        </button>
+                        </button>}
                       </div>
                     ) : enrolled ? (
                       <div style={{ background: '#F4F7E8', borderRadius: '10px', padding: '11px', textAlign: 'center', border: '1px solid #AEBF66' }}>
